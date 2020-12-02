@@ -29,7 +29,10 @@ stages:
 #
 .bigbang:
   image: registry.dsop.io/platform-one/big-bang/pipeline-templates/pipeline-templates/k3d-builder:0.0.1
-
+  after_script:
+    - kubectl get all -A
+    - kubectl get helmrelease -A
+    
 .deploy_bigbang: &deploy_bigbang
   - for script in ./scripts/*.sh; do chmod +x $script && $script; done
 
@@ -220,11 +223,8 @@ aws/rke2/bigbang down:
     - cp ${CI_PROJECT_DIR}/rke2.yaml ~/.kube/config
   script:
     - helm un -n bigbang bigbang
-
     # TODO: Smarter wait
     - sleep 180
-  after_script:
-    - kubectl get all -A
 
 # Destroy RKE2 cluster on AWS
 aws/rke2/cluster down:
