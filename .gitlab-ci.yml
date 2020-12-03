@@ -5,7 +5,7 @@ workflow:
     - if: '$CI_COMMIT_MESSAGE =~ /^wip/'
       when: never
     # Skip pipeline for branches that start with "docs"
-    - if: '$CI_COMMIT_BRANCH =~ /^docs/'
+    - if: '$CI_COMMIT_REF_NAME =~ /^docs/'
       when: never
     - when: always
 
