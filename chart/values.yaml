@@ -44,7 +44,7 @@ gatekeeper:
   enabled: true
   git:
     repo: https://repo1.dsop.io/platform-one/big-bang/apps/core/policy.git
-    branch: chart-release
+    branch: bb-736
 #    commit: ""
 #    tag: ""
   values: {}
