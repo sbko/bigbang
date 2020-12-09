@@ -215,6 +215,8 @@ aws/rke2/bigbang up:
     # Deploy a default storage class for aws
     - kubectl apply -f ${CI_PROJECT_DIR}/umbrella-templates/jobs/rke2/dependencies/k8s-resources/aws/default-ebs-sc.yaml
   script:
+    - kubectl version --short
+    - kubectl get nodes
     - *deploy_bigbang
 
 # Run tests on BigBang on RKE2 cluster on AWS
