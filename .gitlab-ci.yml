@@ -1,3 +1,7 @@
+#-----------------------------------------------------------------------------------------------------------------------
+# Globals
+#
+
 # Define global rules for when pipelines run
 workflow:
   rules:
@@ -32,6 +36,8 @@ variables:
   IMAGE_LIST: images.txt
   IMAGE_PKG: images.tar.gz
   REPOS_PKG: repositories.tar.gz
+
+#-----------------------------------------------------------------------------------------------------------------------
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Pre Stage Jobs
@@ -70,12 +76,6 @@ pre vars:
 # Smoke Tests
 #
 
-.bigbang:
-  image: registry.dsop.io/platform-one/big-bang/pipeline-templates/pipeline-templates/k3d-builder:0.0.1
-  after_script:
-    - kubectl get all -A
-    - kubectl get helmrelease -A
-
 .deploy_bigbang: &deploy_bigbang
   - for script in ./scripts/deploy/*.sh; do chmod +x $script && $script; done
 
@@ -109,6 +109,7 @@ upgrade:
   extends:
     - .k3d
   rules:
+    # Run on merge requests only
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TITLE !~ /^Breaking Change/'
   variables:
     CLUSTER_NAME: "clean-${CI_COMMIT_SHORT_SHA}"
@@ -128,6 +129,11 @@ upgrade:
       - images.txt
     expire_in: 7 days
 
+#-----------------------------------------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Package and Release Jobs
+#
 package:
   stage: package
   extends:
@@ -231,71 +237,6 @@ aws/network down:
     action: stop
 #-----------------------------------------------------------------------------------------------------------------------
 
-
-#-----------------------------------------------------------------------------------------------------------------------
-# Infrastructure: Airgap Networking
-#
-airgap/network up:
-  extends:
-    - .infra fork
-    - .network up
-    - .terraformer_airgap
-    - .airgap
-  stage: network up
-  environment:
-    name: review/aws-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-airgap
-    auto_stop_in: 1 hour
-
-airgap/network down:
-  extends:
-    - .infra cleanup
-    - .network down
-    - .terraformer_airgap
-    - .airgap
-  stage: network down
-  environment:
-    name: review/aws-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-airgap
-    action: stop
-#-----------------------------------------------------------------------------------------------------------------------
-
-#-----------------------------------------------------------------------------------------------------------------------
-# Infrastructure: Airgap Utility
-
-# Create Utility Pkgs
-aws/airgap/package:
-  extends:
-    - .infra fork
-    - .package
-    - .airgap
-  variables:
-    PKG_S3_BUCKET: umbrella-bigbang-airgap
-    PKG_PATH: '$CI_COMMIT_SHORT_SHA'
-  stage: network up
-
-# Create Utility Instance on AWS
-aws/airgap/utility up:
-  extends:
-    - .infra create
-    - .utility up
-    - .terraformer_airgap
-    - .airgap
-  stage: airgap up
-  needs:
-    - job: airgap/network up
-    - job: aws/airgap/package
-
-# Destroy Utility Instance on AWS
-aws/airgap/utility down:
-  extends:
-    - .infra cleanup
-    - .utility down
-    - .terraformer_airgap
-    - .airgap
-  stage: airgap down
-#-----------------------------------------------------------------------------------------------------------------------
-
-
-
 #-----------------------------------------------------------------------------------------------------------------------
 # Infrastructure: RKE2
 #
@@ -375,9 +316,73 @@ aws/rke2/cluster down:
 #-----------------------------------------------------------------------------------------------------------------------
 
 #-----------------------------------------------------------------------------------------------------------------------
+# Infrastructure: Airgap Networking
+#
+airgap/network up:
+  extends:
+    - .infra fork
+    - .network up
+    - .terraformer_airgap
+    - .airgap
+  stage: network up
+  environment:
+    name: review/aws-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-airgap
+    auto_stop_in: 1 hour
+
+airgap/network down:
+  extends:
+    - .infra cleanup
+    - .network down
+    - .terraformer_airgap
+    - .airgap
+  stage: network down
+  environment:
+    name: review/aws-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-airgap
+    action: stop
+#-----------------------------------------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Infrastructure: Airgap Utility
+#
+
+# Create Utility Pkgs
+aws/airgap/package:
+  extends:
+    - .infra fork
+    - .package
+    - .airgap
+  variables:
+    PKG_S3_BUCKET: umbrella-bigbang-airgap
+    PKG_PATH: '$CI_COMMIT_SHORT_SHA'
+  stage: network up
+
+# Create Utility Instance on AWS
+aws/airgap/utility up:
+  extends:
+    - .infra create
+    - .utility up
+    - .terraformer_airgap
+    - .airgap
+  stage: airgap up
+  needs:
+    - job: airgap/network up
+    - job: aws/airgap/package
+
+# Destroy Utility Instance on AWS
+aws/airgap/utility down:
+  extends:
+    - .infra cleanup
+    - .utility down
+    - .terraformer_airgap
+    - .airgap
+  stage: airgap down
+#-----------------------------------------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------------------------------------
 # Infrastructure:Airgap  RKE2
 #
-# Create RKE2 cluster on AWS
+
+# Create airgap RKE2 cluster on AWS
 airgap/rke2/cluster up:
   stage: cluster up
   extends:
@@ -389,7 +394,7 @@ airgap/rke2/cluster up:
     - job: airgap/network up
     - job: aws/airgap/utility up
 
-# Install BigBang on RKE2 cluster on AWS
+# Install BigBang on airgap RKE2 cluster on AWS
 airgap/rke2/bigbang up:
   stage: bigbang up
   extends:
@@ -411,7 +416,7 @@ airgap/rke2/bigbang up:
   script:
     - *deploy_bigbang
 
-# Run tests on BigBang on RKE2 cluster on AWS
+# Run tests on BigBang on airgap RKE2 cluster on AWS
 
 airgap/rke2/bigbang test:
   stage: test
@@ -436,7 +441,7 @@ airgap/rke2/bigbang test:
     - chmod +x scripts/hosts.sh && ./scripts/hosts.sh
     - *test_bigbang
 
-# Uninstall BigBang on RKE2 cluster on AWS
+# Uninstall BigBang on airgap RKE2 cluster on AWS
 airgap/rke2/bigbang down:
   stage: bigbang down
   extends:
@@ -456,7 +461,7 @@ airgap/rke2/bigbang down:
     # TODO: Smarter wait
     - sleep 180
 
-# Destroy RKE2 cluster on AWS
+# Destroy airgap RKE2 cluster on AWS
 airgap/rke2/cluster down:
   stage: cluster down
   extends:
