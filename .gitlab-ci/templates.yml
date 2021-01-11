@@ -49,3 +49,34 @@ include:
   after_script:
     - cd ${CI_PROJECT_DIR}/${TF_ROOT}
     - terraform workspace select default && terraform workspace delete "${TF_VAR_env}"
+
+.package:
+  image: registry.dsop.io/platform-one/big-bang/umbrella/synker:0.0.1
+  before_script:
+    # Set up auth
+    - mkdir -p /root/.docker
+    - echo $DOCKER_AUTH_CONFIG > /root/.docker/config.json
+  script:
+    - cp ./scripts/package/synker.yaml ./synker.yaml
+
+    # Populate images list in synker config
+    # NOTE: This is stupid and hacky, use yq or something better to do this
+    - cat images.txt | sed -e 's/^/    - /' >> synker.yaml
+
+    - synker pull -b=1
+
+    # Tar up synker as well?
+    - cp /usr/local/bin/synker synker.yaml /var/lib/registry/
+    - tar -C /var/lib/registry -czvf $IMAGE_PKG .
+    - tar -czvf $IMAGE_PKG /var/lib/registry
+
+    # Package dependent repos
+    - ./scripts/package/gits.sh
+    - tar -czf $REPOS_PKG repos/
+
+    # Prep release
+    - mkdir -p release
+    - mv $IMAGE_LIST $IMAGE_PKG $REPOS_PKG release/
+
+    # Publish packages to s3 release
+    - aws s3 sync --quiet release/ s3://${PKG_S3_BUCKET}/umbrella/${PKG_PATH}
