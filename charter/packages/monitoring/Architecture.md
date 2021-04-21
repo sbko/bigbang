@@ -20,6 +20,10 @@ graph LR
     grafanaservice{{Grafana Service}} --> grafanapods("Grafana Pod(s)")
     grafanasvcmonitor("Service Monitor") --"Metrics Port"--> grafanaservice
     Prometheus --> grafanasvcmonitor("Service Monitor")
+    prometheusoperatorpods("Prometheus-Operator Pod(s)") --> monitoringpods("Monitoring Pod(s)")
+    prometheusoperatorservice{{Prometheus-Operator Service}} -->  prometheusoperatorpods("rometheus-Operator Pod(s)")
+    prometheusoperatorsvcmonitor("Service Monitor") --"Metrics Port"--> prometheusoperatorservice
+    Prometheus --> prometheusoperatorsvcmonitor("Service Monitor")
 
     
   end
