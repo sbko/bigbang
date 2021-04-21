@@ -16,7 +16,7 @@ graph LR
     alertmanagerservice{{AlertManager Service}} --> alertmanagerpods("AlertManager Pod(s)")
     alertmanagersvcmonitor("Service Monitor") --"Metrics Port"--> alertmanagerservice
     Prometheus --> alertmanagersvcmonitor("Service Monitor")
-    grafanarods("Grafana Pod(s)") --> monitoringpods("Monitoring Pod(s)")
+    grafanapods("Grafana Pod(s)") --> monitoringpods("Monitoring Pod(s)")
     grafanaservice{{Grafana Service}} --> grafanapods("Grafana Pod(s)")
     grafanarsvcmonitor("Service Monitor") --"Metrics Port"--> grafanaservice
     Prometheus --> grafanasvcmonitor("Service Monitor")
