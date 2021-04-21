@@ -14,6 +14,7 @@ graph LR
   subgraph "Monitoring"
     monitoringpods("Monitoringt Pod(s)")
     alertmanager{{Alert Manager}} --> alertmanagerpods("AlertManager Pod(s)")
+    alertmanager{{Alert Manager}} --> alertmanagersvcmonitor("Service Monitor")
     grafana{{Grafana}} --> grafanapods("Grafana  Pod(s)")
     prometheus{{Prometheus}} --> prometheuspods("Prometheus Pod(s)")
     prometheus-operator{{Prometheus-Operator}} --> prometheusoperatorpods("PrometheusOperator Pod(s)")
@@ -35,11 +36,7 @@ graph LR
     monitoringpods("Monitoring Pod(s)") --"Logs"--> fluent(Fluentbit) --> logging-ek-es-http
     logging-ek-es-http{{Elastic Service<br />logging-ek-es-http}} --> elastic[(Elastic Storage)]
   end
-  subgraph "Monitoring"
-    svcmonitoralertmanager("Service Monitor") --"Metrics Port"-->  alertmanager
-    Alert Manager --> svcmonitoralertmanager("Service Monitor")
-    
-  end
+  
 ```   
 ### UI
 
