@@ -28,6 +28,14 @@ graph LR
     nodeexporterservice{{Node-Exporter Service}} -->  nodeexporterpods("Node-Exporter Pod(s)")
     nodeexportersvcmonitor("Service Monitor") --"Metrics Port"-->  nodeexporterservice
     Prometheus --> nodeexportersvcmonitor("Service Monitor")
+    kubestatemetricspods("Kube-State-Metrics Pod(s)") --> kubestatemetricspods("Monitoring Pod(s)")
+    kubestatemetricsservice{{Kube-State-Metrics Service}} --> kubestatemetricspods("Kube-State-Metrics Pod(s)")
+    kubestatemetricssvcmonitor("Service Monitor") --"Metrics Port"-->  kubestatemetricsservice
+    Prometheus --> kubestatemetricssvcmonitor("Service Monitor")
+    kubeprometheusprometheus("Kube-Prometheus-Prometheus Pod(s)") --> kubeprometheusprometheuspods("Monitoring Pod(s)")
+    kubeprometheusprometheusservice{{Kube-Prometheus-Prometheus Service}} --> kubestatemetricspods("Kube-Prometheus-Prometheus Pod(s)")
+    kubeprometheusprometheussvcmonitor("Service Monitor") --"Metrics Port"-->  kubeprometheusprometheusservice
+    Prometheus --> kubeprometheusprometheussvcmonitor("Service Monitor")
 
     
   end
