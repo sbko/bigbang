@@ -55,8 +55,7 @@ Monitoring deployment in BigBang provides web UI for Alert Manager, Prometheus a
 
 ### Istio Configuration
 
-Istio is disabled in the monitoring
- chart by default and can be enabled by setting the following values in the bigbang chart:
+Istio is disabled in the monitoring chart by default and can be enabled by setting the following values in the bigbang chart:
 
 ```yaml
 hostname: bigbang.dev
@@ -64,53 +63,121 @@ istio:
   enabled: true
 ```
 
-### Dependency Packages
+Within the Big Bang chart the external URLs for prometheus, grafana, and alertmanager
 
-By default BigBang  installs additional, dependent charts:
-* kubernetes/kube-state-metrics
-* prometheus-community/prometheus-node-exporter
-* grafana/grafana
 
 ### Storage
 #### Alert Manager
-Persistent storage values for Alert Manager can be set/modified  in the bigbang chart:
+Persistent storage values for Alert Manager can be set/modified in the Big Bang chart:
 
 ```yaml
-alertmanager:
-  storage:
-    volumeClaimTemplate:
-       spec:
-          storageClassName: 
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 50Gi
-        selector: {}
+monitoring:
+  values:
+    alertmanager:
+      alertmanagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+                storageClassName: 
+                accessModes: ["ReadWriteOnce"]
+                resources:
+                  requests:
+                    storage: 50Gi
+              selector: {}
 ```
 
 #### Prometheus-Operator
-Persistent storage values for Prometheus-Operator can be set/modified  in the bigbang chart:
+Persistent storage values for Prometheus-Operator can be set/modified in the Big Bang chart:
 
 ```yaml
-prometheusSpec:
-  storageSpec:
-    volumeClaimTemplate:
-       spec:
-          storageClassName: 
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 50Gi
-        selector: {}
+monitoring:
+  values:
+    prometheus:
+      prometheusSpec:
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+                storageClassName: 
+                accessModes: ["ReadWriteOnce"]
+                resources:
+                  requests:
+                    storage: 50Gi
+              selector: {}
+```
+
+#### Grafana
+Persistent storage values for Grafana can be set/modified in the Big Bang chart:
+
+```yaml
+monitoring:
+  values:
+    grafana:
+      persistence:
+        type: pvc
+        enabled: false
+        # storageClassName: default
+        accessModes:
+          - ReadWriteOnce
+        size: 10Gi
+        # annotations: {}
+        finalizers:
+          - kubernetes.io/pvc-protection
+        # selectorLabels: {}
+        # subPath: ""
+        # existingClaim:
 ```
 
 ### Logging
 
-Mattermost provides access to the system logs via the "System Console" (under "Server Logs"). The UI provides a basic search functionality as well for these logs
+Within the kube-prometheus-stack chart you can customize both the LogFormat and LogLevel for the following components within the chart:
+Note: within Big Bang, logs are captured by fluentbit and shipped to elastic by default.
+
+#### Prometheus-Operator
+LogFormat and LogLevel can be set for Prometheus-Operator via the following values in the Big Bang chart:
+```yaml
+monitoring:
+  values:
+    prometheusOperator:
+      logFormat: logfmt
+      logLevel: info
+```
+
+#### Prometheus
+LogFormat and LogLevel can be set for Prometheus via the following values in the Big Bang chart:
+```yaml
+monitoring:
+  values:
+    prometheus:
+      prometheusSpec:
+         logFormat: logfmt
+         logLevel: info
+```
+
+#### Alertmanager
+LogFormat and LogLevel can be set for Alertmanager via the following values in the Big Bang chart:
+```yaml
+monitoring:
+  values:
+    alertmanager:
+      alertmanagerSpec:
+        logFormat: logfmt
+         logLevel: info
+```
+
+#### Grafana
+LogLevel can be set for Grafana via the following values in the Big Bang chart:
+```yaml
+monitoring:
+  values:
+    grafana:
+      grafana.ini:
+        log:
+          mode: console
+```
 
 ## Single Sign on (SSO)
 
-SSO can be configured for monitoring  following the documentation provided. \
+SSO can be configured for monitoring through Authservice, more info is included in the following the documentation. \
 [Monitoring SSO Integration](https://repo1.dso.mil/platform-one/big-bang/apps/core/monitoring/-/blob/main/docs/KEYCLOAK.md)
 
 ## Monitoring
@@ -133,19 +200,26 @@ Monitoring deployment has serviceMonitors enabled for
 
 ### HA
 
-High Availability can be accomplished by increasing the number of replicas in the deployment.
+High Availability can be accomplished by increasing the number of replicas for the deployments of Alertmanager, Prometheus and Grafana:
 
 ```yaml
-alertmanagerSpec:
-  replicas:
-prometheus:
-  replicas:
+monitoring:
+  values:
+    alertmanager:
+      alertmanagerSpec:
+        replicas:
+    prometheus:
+      prometheusSpec:
+        replicas:
+    grafana:
+      replicas:
 ```
 
+### Dependency Packages
 
-
-
-
-
+By default BigBang  installs additional, dependent charts:
+* kubernetes/kube-state-metrics
+* prometheus-community/prometheus-node-exporter
+* grafana/grafana
 
 
