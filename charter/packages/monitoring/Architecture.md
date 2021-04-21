@@ -36,7 +36,7 @@ graph LR
     logging-ek-es-http{{Elastic Service<br />logging-ek-es-http}} --> elastic[(Elastic Storage)]
   end
   subgraph "Monitoring"
-    svcmonitoralertmanager("Service Monitor") --"Metrics Port"-->  Alert Manager
+    svcmonitoralertmanager("Service Monitor") --"Metrics Port"-->  alertmanager
     Alert Manager --> svcmonitoralertmanager("Service Monitor")
     
   end
