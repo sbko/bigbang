@@ -44,6 +44,8 @@ graph LR
   end
   subgraph "Ingress"
     ig(Ingress Gateway) --"App Port"--> alertmanagerservice
+    ig(Ingress Gateway) --"App Port"--> grafanaservice
+    ig(Ingress Gateway) --"App Port"--> kubeprometheusservice
   end 
   
 ```   
