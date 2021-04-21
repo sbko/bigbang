@@ -11,7 +11,7 @@ Monioring in Bibang is deployed using the upstream chart  [kube-prometheus-stack
 
  ```mermaid
 graph LR
-  subgraph "Monitoringt"
+  subgraph "Monitoring"
     monitoringpods("Monitoringt Pod(s)")
     alertmanager{{Alert Manager}} --> monitoringpods("Monitoring Pod(s)")
     grafana{{Grafana}} --> monitoringpods("Monitoring Pod(s)")
@@ -25,16 +25,9 @@ graph LR
      
   end
 
-  subgraph "Database Storage (Postgres)"
-    mattermostpods("Mattermost Pod(s)") --"Chats/Config"--> database[(Mattermost DB)]
-  end
-
-  subgraph "File Storage (S3/Minio)"
-    mattermostpods("Mattermost Pod(s)") --"Files"--> bucket[(Mattermost Bucket)]
-  end
 
   subgraph "Logging"
-    mattermostpods("Mattermost Pod(s)") --"Logs"--> fluent(Fluentbit) --> logging-ek-es-http
+    monitoringpods("Monitoring Pod(s)") --"Logs"--> fluent(Fluentbit) --> logging-ek-es-http
     logging-ek-es-http{{Elastic Service<br />logging-ek-es-http}} --> elastic[(Elastic Storage)]
   end
 ```   
