@@ -32,10 +32,10 @@ graph LR
     kubestatemetricsservice{{Kube-State-Metrics Service}} --> kubestatemetricspods("Kube-State-Metrics Pod(s)")
     kubestatemetricssvcmonitor("Service Monitor") --"Metrics Port"-->  kubestatemetricsservice
     Prometheus --> kubestatemetricssvcmonitor("Service Monitor")
-    kubeprometheusprometheuspods("Kube-Prometheus-Prometheus Pod(s)") --> kubeprometheusprometheuspods("Monitoring Pod(s)")
-    kubeprometheusprometheusservice{{Kube-Prometheus-Prometheus Service}} --> kubestatemetricspods("Kube-Prometheus-Prometheus Pod(s)")
-    kubeprometheusprometheussvcmonitor("Service Monitor") --"Metrics Port"-->  kubeprometheusprometheusservice
-    Prometheus --> kubeprometheusprometheussvcmonitor("Service Monitor")
+    prometheuspods("Prometheus Pod(s)") --> prometheuspods("Monitoring Pod(s)")
+    prometheusservice{{Prometheus Service}} --> prometheuspods("Prometheus Pod(s)")
+    prometheussvcmonitor("Service Monitor") --"Metrics Port"-->  prometheusservice
+    Prometheus --> prometheussvcmonitor("Service Monitor")
 
     
   end
