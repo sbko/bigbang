@@ -12,15 +12,20 @@ Monioring in Bibang is deployed using the upstream chart  [kube-prometheus-stack
  ```mermaid
 graph LR
   subgraph "Monitoring"
-    monitoringpods("Monitoringt Pod(s)")
     alertmanager{{Alert Manager}} --> alertmanagerpods("AlertManager Pod(s)")
     alertmanager{{Alert Manager}} --> alertmanagersvcmonitor("Service Monitor")
     grafana{{Grafana}} --> grafanapods("Grafana  Pod(s)")
+    grafana{{Grafana}} --> grafanasvcmonitor("Service Monitor")
     prometheus{{Prometheus}} --> prometheuspods("Prometheus Pod(s)")
+    prometheus{{Prometheus}} --> prometheussvcmonitor("Service Monitor")
     prometheus-operator{{Prometheus-Operator}} --> prometheusoperatorpods("PrometheusOperator Pod(s)")
-    prometheus-node-exporter{{Prometheus-Node-Exporter}} --> prometheusnodeexporter("PrometheusNodeExporter Pod(s)")
-    kube-state-metrics{{Kube-State-Metrics}} --> kubestatemetrics("KubeStateMetrics Pod(s)")
-    kube-prometheus-prometheus{{Kube-Prometheus-Prometheus}} --> kubeprometheusprometheus("KubePrometheusPrometheus Pod(s)")
+    prometheus-operator{{Prometheus-Operator}} --> prometheusoperatorsvcmonitor("Service Monitor")
+    prometheus-node-exporter{{Prometheus-Node-Exporter}} --> prometheusnodeexporterpods("PrometheusNodeExporter Pod(s)")
+    prometheus-node-exporter{{Prometheus-Node-Exporter}} --> prometheusnodeexportersvcmonitor("Service Monitor")
+    kube-state-metrics{{Kube-State-Metrics}} --> kubestatemetricspods("KubeStateMetrics Pod(s)")
+    kube-state-metrics{{Kube-State-Metrics}} --> kubestatemetricssvcmonitor("Service Monitor")
+    kube-prometheus-prometheus{{Kube-Prometheus-Prometheus}} --> kubeprometheusprometheuspod("KubePrometheusPromectheus Pods")
+   kube-prometheus-prometheus{{Kube-Prometheus-Prometheus}} --> kubeprometheusprometheussvcmonitor("Service Monitor")
 
   end      
 
