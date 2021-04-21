@@ -17,35 +17,7 @@ graph LR
     alertmanagersvcmonitor("Service Monitor") --"Metrics Port"--> alertmanagerservice
     Prometheus --> alertmanagersvcmonitor("Service Monitor")
 
-    alertmanager{{Alert Manager}} --> alertmanagerpods("AlertManager Pod(s)")
-    svcmonitor("Service Monitor") --"Metrics Port"--> alertmanager
-    Prometheus --> alertsvcmonitor("Service Monitor")
-    grafana{{Grafana}} --> grafanapods("Grafana  Pod(s)")
-    grafana{{Grafana}} --> grafanasvcmonitor("Service Monitor")
-    prometheus{{Prometheus}} --> prometheuspods("Prometheus Pod(s)")
-    prometheus{{Prometheus}} --> prometheussvcmonitor("Service Monitor")
-    prometheus-operator{{Prometheus-Operator}} --> prometheusoperatorpods("PrometheusOperator Pod(s)")
-    prometheus-operator{{Prometheus-Operator}} --> prometheusoperatorsvcmonitor("Service Monitor")
-    prometheus-node-exporter{{Prometheus-Node-Exporter}} --> prometheusnodeexporterpods("PrometheusNodeExporter Pod(s)")
-    prometheus-node-exporter{{Prometheus-Node-Exporter}} --> prometheusnodeexportersvcmonitor("Service Monitor")
-    kube-state-metrics{{Kube-State-Metrics}} --> kubestatemetricspods("KubeStateMetrics Pod(s)")
-    kube-state-metrics{{Kube-State-Metrics}} --> kubestatemetricssvcmonitor("Service Monitor")
-    kube-prometheus-prometheus{{Kube-Prometheus-Prometheus}} --> kubeprometheusprometheuspod("KubePrometheusPromectheus Pods")
-   kube-prometheus-prometheus{{Kube-Prometheus-Prometheus}} --> kubeprometheusprometheussvcmonitor("Service Monitor")
-
-  end      
-
-  subgraph "Ingress"
-    ig(Ingress Gateway) --"App Port"--> alertmanager
-    ig(Ingress Gateway) --"App Port"--> grafana
-     ig(Ingress Gateway) --"App Port"--> prometheus
-     
-  end
-
-
-  subgraph "Logging"
-    monitoringpods("Monitoring Pod(s)") --"Logs"--> fluent(Fluentbit) --> logging-ek-es-http
-    logging-ek-es-http{{Elastic Service<br />logging-ek-es-http}} --> elastic[(Elastic Storage)]
+    
   end
   
 ```   
