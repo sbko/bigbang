@@ -42,6 +42,9 @@ graph LR
     monitoringpods("Monitoring Pod(s)") --"Logs"--> fluent(Fluentbit) --> logging-ek-es-http
     logging-ek-es-http{{Elastic Service<br />logging-ek-es-http}} --> elastic[(Elastic Storage)]
   end
+  subgraph "Ingress"
+    ig(Ingress Gateway) --"App Port"--> alertmanagerservice
+  end 
   
 ```   
 ### UI
