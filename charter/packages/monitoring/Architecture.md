@@ -13,9 +13,14 @@ Monioring in Bibang is deployed using the upstream chart  [kube-prometheus-stack
 graph LR
   subgraph "Monitoring"
     monitoringpods("Monitoringt Pod(s)")
-    alertmanager{{Alert Manager}} --> monitoringpods("Monitoring Pod(s)")
-    grafana{{Grafana}} --> monitoringpods("Monitoring Pod(s)")
-    prometheus{{Prometheus}} --> monitoringpods("Monitoring Pod(s)")
+    alertmanager{{Alert Manager}} --> alertmanagerpods("AlertManager Pod(s)")
+    grafana{{Grafana}} --> grafanapods("Grafana  Pod(s)")
+    prometheus{{Prometheus}} --> prometheuspods("Prometheus Pod(s)")
+    prometheus-operator{{Prometheus-Operator}} --> prometheusoperatorpods("PrometheusOperator Pod(s)")
+    prometheus-node-exporter{{Prometheus-Node-Exporter}} --> prometheusnodeexporter("PrometheusNodeExporter Pod(s)")
+    kube-state-metrics{{Kube-State-Metrics}} --> kubestatemetrics("KubeStateMetrics Pod(s)")
+    kube-prometheus-prometheus{{Kube-Prometheus-Prometheus}} --> kubeprometheusprometheus("KubePrometheusPrometheus Pod(s)")
+
   end      
 
   subgraph "Ingress"
@@ -29,6 +34,18 @@ graph LR
   subgraph "Logging"
     monitoringpods("Monitoring Pod(s)") --"Logs"--> fluent(Fluentbit) --> logging-ek-es-http
     logging-ek-es-http{{Elastic Service<br />logging-ek-es-http}} --> elastic[(Elastic Storage)]
+  end
+  subgraph "Monitoring"
+    svcmonitoralertmanager("Service Monitor") --"Metrics Port"-->  alertmanager
+    AlertManager --> svcmonitoralertmanager("Service Monitor")
+    svcmonitorkubeprometheusoperator("Service Monitor") --"Metrics Port"-->  prometheus-operator
+    Prometheus-Operator --> svcmonitorkubeprometheusoperator("Service Monitor")
+    
+    
+    
+
+
+
   end
 ```   
 ### UI
