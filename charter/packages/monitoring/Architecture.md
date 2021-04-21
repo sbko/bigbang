@@ -25,7 +25,7 @@ graph LR
     prometheusoperatorsvcmonitor("Service Monitor") --"Metrics Port"--> prometheusoperatorservice
     Prometheus --> prometheusoperatorsvcmonitor("Service Monitor")
     nodeexporterpods("Node-Exporter Pod(s)") --> monitoringpods("Monitoring Pod(s)")
-    nodeexporterservice{{Node-Exporter Service}} -->  nodeexporterpodspods("Node-Exporter Pod(s)")
+    nodeexporterservice{{Node-Exporter Service}} -->  nodeexporterpods("Node-Exporter Pod(s)")
     nodeexportersvcmonitor("Service Monitor") --"Metrics Port"-->  nodeexporterservice
     Prometheus --> nodeexportersvcmonitor("Service Monitor")
 
