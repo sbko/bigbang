@@ -13,7 +13,7 @@ Monioring in Bibang is deployed using the upstream chart  [kube-prometheus-stack
 graph LR
   subgraph "Monitoring"
     alertmanager{{Alert Manager}} --> alertmanagerpods("AlertManager Pod(s)")
-    
+    svcmonitor("Service Monitor") --"Metrics Port"--> alertmanager
     Prometheus --> alertsvcmonitor("Service Monitor")
     grafana{{Grafana}} --> grafanapods("Grafana  Pod(s)")
     grafana{{Grafana}} --> grafanasvcmonitor("Service Monitor")
