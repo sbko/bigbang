@@ -9,6 +9,50 @@ Monioring in Bibang is deployed using the upstream chart  [kube-prometheus-stack
 
 ## Big Bang Touchpoints
 
+ ```mermaid
+graph LR
+  subgraph "Monitoringt"
+    monitoringpods("Monitoringt Pod(s)")
+    alertmanager{{Monitoring Service}} --> monitoringpods("Monitoring Pod(s)")
+    grafana{{Monitoring Service}} --> monitoringpods("Monitoring Pod(s)")
+    prometheus{{Monitoring Service}} --> monitoringpods("Monitoring Pod(s)")
+  end      
+
+  subgraph "Ingress"
+    ig(Ingress Gateway) --"App Port"--> alertmanager
+    ig(Ingress Gateway) --"App Port"--> grafana
+     ig(Ingress Gateway) --"App Port"--> prometheus
+     
+  end
+
+  subgraph "Database Storage (Postgres)"
+    mattermostpods("Mattermost Pod(s)") --"Chats/Config"--> database[(Mattermost DB)]
+  end
+
+  subgraph "File Storage (S3/Minio)"
+    mattermostpods("Mattermost Pod(s)") --"Files"--> bucket[(Mattermost Bucket)]
+  end
+
+  subgraph "Logging"
+    mattermostpods("Mattermost Pod(s)") --"Logs"--> fluent(Fluentbit) --> logging-ek-es-http
+    logging-ek-es-http{{Elastic Service<br />logging-ek-es-http}} --> elastic[(Elastic Storage)]
+  end
+```   
+### UI
+
+Monitoring deployment in BigBang provides web UI for Alert Manager, Prometheus and Grafana
+
+### Istio Configuration
+
+Istio is disabled in the monitoring
+ chart by default and can be enabled by setting the following values in the bigbang chart:
+
+```yaml
+hostname: bigbang.dev
+istio:
+  enabled: true
+```
+
 ### Dependency Packages
 
 By default BigBang  installs additional, dependent charts:
@@ -51,6 +95,8 @@ prometheusSpec:
 
 ### Logging
 
+Mattermost provides access to the system logs via the "System Console" (under "Server Logs"). The UI provides a basic search functionality as well for these logs
+
 ## Single Sign on (SSO)
 
 SSO can be configured for monitoring  following the documentation provided. \
@@ -68,6 +114,23 @@ Monitoring deployment has serviceMonitors enabled for
 * kube-state-metrics
 *  kubelet
 * node-exporter
+* alert manager
+* grafana
+* prometheus
+* prometheus-operator
+* node-exporter
+
+### HA
+
+High Availability can be accomplished by increasing the number of replicas in the deployment.
+
+```yaml
+alertmanagerSpec:
+  replicas:
+prometheus:
+  replicas:
+```
+
 
 
 
