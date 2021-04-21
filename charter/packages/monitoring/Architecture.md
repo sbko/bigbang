@@ -12,6 +12,11 @@ Monioring in Bibang is deployed using the upstream chart  [kube-prometheus-stack
  ```mermaid
 graph LR
   subgraph "Monitoring"
+    alertmanagerpods("AlertManager Pod(s)")
+    alertmanagerservice{{AlertManager Service}} --> alertmanagerpods("AlertManager Pod(s)")
+    alertmanagersvcmonitor("Service Monitor") --"Metrics Port"--> alertmanagerservice
+    Prometheus --> alertmanagersvcmonitor("Service Monitor")
+
     alertmanager{{Alert Manager}} --> alertmanagerpods("AlertManager Pod(s)")
     svcmonitor("Service Monitor") --"Metrics Port"--> alertmanager
     Prometheus --> alertsvcmonitor("Service Monitor")
