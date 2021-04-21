@@ -13,9 +13,9 @@ Monioring in Bibang is deployed using the upstream chart  [kube-prometheus-stack
 graph LR
   subgraph "Monitoringt"
     monitoringpods("Monitoringt Pod(s)")
-    alertmanager{{Monitoring Service}} --> monitoringpods("Monitoring Pod(s)")
-    grafana{{Monitoring Service}} --> monitoringpods("Monitoring Pod(s)")
-    prometheus{{Monitoring Service}} --> monitoringpods("Monitoring Pod(s)")
+    alertmanager{{Alert Manager}} --> monitoringpods("Monitoring Pod(s)")
+    grafana{{Grafana}} --> monitoringpods("Monitoring Pod(s)")
+    prometheus{{Prometheus}} --> monitoringpods("Monitoring Pod(s)")
   end      
 
   subgraph "Ingress"
