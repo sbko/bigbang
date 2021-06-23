@@ -355,6 +355,18 @@ addons:
         zones:
           servers: 1
         volumesPerServer: 1
+      bbtests:
+        enabled: true
+        cypress:
+          artifacts: true
+          envs:
+            cypress_url: https://chat.bigbang.dev
+            cypress_mm_email: "test@bigbang.dev"
+            cypress_mm_user: "bigbang"
+            cypress_mm_password: "Bigbang#123"
+        istio:
+          hosts:
+            - "chat.{{ .Values.hostname }}"
 
   nexus:
     enabled: false
