@@ -177,7 +177,7 @@ kiali:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/kiali.git
     path: "./chart"
-    tag: "1.32.0-bb.1"
+    tag: "1.32.0-bb.2"
 
   # -- Flux reconciliation overrides specifically for the Kiali Package
   flux: {}
@@ -209,7 +209,7 @@ clusterAuditor:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/cluster-auditor.git
     path: "./chart"
-    tag: "0.2.0-bb.5"
+    tag: "0.2.0-bb.6"
 
   # -- Flux reconciliation overrides specifically for the Cluster Auditor Package
   flux: {}
@@ -287,7 +287,7 @@ eckoperator:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/eck-operator.git
     path: "./chart"
-    tag: "1.4.0-bb.2"
+    tag: "1.4.0-bb.3"
 
   # -- Flux reconciliation overrides specifically for the ECK Operator Package
   flux: {}
@@ -301,7 +301,7 @@ fluentbit:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/fluentbit.git
     path: "./chart"
-    tag: "0.15.8-bb.5"
+    tag: "0.15.14-bb.0"
 
   # -- Flux reconciliation overrides specifically for the Fluent-Bit Package
   flux: {}
@@ -396,7 +396,7 @@ addons:
     git:
       repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/argocd.git
       path: "./chart"
-      tag: "2.14.7-bb.5"
+      tag: "3.6.8-bb.0"
 
     # -- Flux reconciliation overrides specifically for the ArgoCD Package
     flux: {}
@@ -582,6 +582,9 @@ addons:
 
     # -- Values to passthrough to the gitlab runner chart: https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab-runner.git
     values: {}
+
+    # -- Post Renderers.  See docs/postrenders.md
+    postRenderers: []
 
   nexus:
     # -- Toggle deployment of Nexus.
@@ -800,7 +803,7 @@ addons:
     git:
       repo: https://repo1.dso.mil/platform-one/big-bang/apps/collaboration-tools/mattermost-operator.git
       path: "./chart"
-      tag: "1.14.0-bb.1"
+      tag: "1.14.0-bb.2"
 
     # -- Flux reconciliation overrides specifically for the Mattermost Operator Package
     flux: {}
@@ -817,7 +820,7 @@ addons:
     git:
       repo: https://repo1.dso.mil/platform-one/big-bang/apps/collaboration-tools/mattermost.git
       path: "./chart"
-      # tag: "0.1.6-bb.4"
+      # tag: "0.1.6-bb.6"
       branch: "newgluon"
 
     # -- Flux reconciliation overrides specifically for the Mattermost Package
@@ -913,7 +916,7 @@ addons:
     git:
       repo: https://repo1.dso.mil/platform-one/big-bang/apps/cluster-utilities/velero.git
       path: "./chart"
-      tag: "2.21.1-bb.4"
+      tag: "2.21.1-bb.5"
 
     # -- Flux reconciliation overrides specifically for the Velero Package
     flux: {}
