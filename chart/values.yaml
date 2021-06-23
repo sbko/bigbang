@@ -150,8 +150,7 @@ jaeger:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/jaeger.git
     path: "./chart"
-    # tag: "2.19.1-bb.4"
-    branch: "gluon"
+    tag: "2.19.1-bb.4"
 
   # -- Flux reconciliation overrides specifically for the Jaeger Package
   flux: {}
@@ -178,8 +177,7 @@ kiali:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/kiali.git
     path: "./chart"
-    # tag: "1.32.0-bb.2"
-    branch: "gluon"
+    tag: "1.32.0-bb.2"
 
   # -- Flux reconciliation overrides specifically for the Kiali Package
   flux: {}
