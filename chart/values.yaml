@@ -150,7 +150,8 @@ jaeger:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/jaeger.git
     path: "./chart"
-    tag: "2.19.1-bb.4"
+    # tag: "2.19.1-bb.4"
+    branch: "gluon"
 
   # -- Flux reconciliation overrides specifically for the Jaeger Package
   flux: {}
