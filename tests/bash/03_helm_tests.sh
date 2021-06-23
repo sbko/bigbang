@@ -7,6 +7,8 @@ installed_helmreleases=$(helm list -n bigbang -o json | jq '.[].name' | tr -d '"
 
 mkdir -p cypress-tests
 
+ERRORS=0
+
 for hr in $installed_helmreleases; do
   test_result=$(helm test $hr -n bigbang) && export EXIT_CODE=$? || export EXIT_CODE=$?
   echo "$test_result"
@@ -31,7 +33,12 @@ for hr in $installed_helmreleases; do
       rm -rf cypress-videos.tar.gz.b64 cypress-videos.tar.gz
     fi
     if [[ ${EXIT_CODE} -ne 0 ]]; then
-      exit ${EXIT_CODE}
+      ERRORS=$((ERRORS + 1))
     fi
   fi
 done
+
+if [ $ERRORS -gt 0 ]; then
+  echo "Encountered $ERRORS errors while running tests. See output logs above and artifacts in the clean install job."
+  exit 1
+fi
