@@ -44,6 +44,26 @@ istio:
         auth:
           strategy: "anonymous"
 
+jaeger:
+  enabled: true
+  values:
+    bbtests:
+      enabled: true
+      cypress:
+        artifacts: true
+        envs:
+          cypress_url: "https://tracing.bigbang.dev"
+
+kiali:
+  enabled: true
+  values:
+    bbtests:
+      enabled: true
+      cypress:
+        artifacts: true
+        envs:
+          cypress_url: 'https://kiali.bigbang.dev'
+
 clusterAuditor:
   enabled: true
   values:
