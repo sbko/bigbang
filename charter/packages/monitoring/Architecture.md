@@ -1,7 +1,7 @@
 # Monitioring
 
 ## Overview
-Monioring in Bibang is deployed using the upstream chart  [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/charts/kube-prometheus-stack)
+Monitoring in Bigbang is deployed using the upstream chart  [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)
 
 ## Contents
 
