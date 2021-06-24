@@ -3,11 +3,7 @@
 ## Overview
 Monitoring in Bigbang is deployed using the upstream chart  [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)
 
-## Contents
-
-[Developer Guide](docs/developer-guide.md)
-
-## Big Bang Touchpoints
+Installs the kube-prometheus stack, a collection of Kubernetes manifests, Grafana dashboards, and Prometheus rules combined with documentation and scripts to provide easy to operate end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator.
 
  ```mermaid
 graph LR
@@ -39,35 +35,24 @@ graph LR
   end
 
   subgraph "Logging"
-    monitoringpods("Monitoring Pod(s)") --"Logs"--> fluent(Fluentbit) --> logging-ek-es-http
+    monitoringpods("Monitoring Pod(s)") ---|Logs|fluent(Fluentbit) --> logging-ek-es-http
     logging-ek-es-http{{Elastic Service<br />logging-ek-es-http}} --> elastic[(Elastic Storage)]
   end
   subgraph "Ingress"
-    ig(Ingress Gateway) --"App Port"--> alertmanagerservice
-    ig(Ingress Gateway) --"App Port"--> grafanaservice
-    ig(Ingress Gateway) --"App Port"--> kubeprometheusservice
+    ig(Ingress Gateway, Gateway, VirtualService) --"App Port"--> alertmanagerservice
+    ig(Ingress Gateway, Gateway, VirtualService) --"App Port"--> grafanaservice
+    ig(Ingress Gateway, Gateway, VirtualService) --"App Port"--> kubeprometheusservice
   end 
   
-```   
-### UI
-
-Monitoring deployment in BigBang provides web UI for Alert Manager, Prometheus and Grafana
-
-### Istio Configuration
-
-Istio is disabled in the monitoring chart by default and can be enabled by setting the following values in the bigbang chart:
-
-```yaml
-hostname: bigbang.dev
-istio:
-  enabled: true
 ```
 
-Within the Big Bang chart the external URLs for prometheus, grafana, and alertmanager
+## Big Bang Touchpoints
+### UI
 
+Alertmanager, Prometheus and Grafana within the monitoring Package have UIs that are accessible and configurable. By default they are externally available behind an Istio installation.
 
 ### Storage
-#### Alert Manager
+#### Alertmanager
 Persistent storage values for Alert Manager can be set/modified in the Big Bang chart:
 
 ```yaml
