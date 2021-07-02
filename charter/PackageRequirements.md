@@ -35,23 +35,15 @@ When the above are true, the package _may_ be considered for approval and inclus
 
 Depending on the package, the customer need, and the approval process, packages may not comply with the above requirements to be integrated with BigBang, but still be heavily desired by customers.  To account for these packages, BigBang Third Party Packages can be used.
 
-### Third Party Packages
+### In-Tree Packages
 
-[Third Party Packages](https://repo1.dso.mil/platform-one/big-bang/apps/third-party) are packages that adhere by all the BigBang package standards _except_ the IronBank containers/approvals.  These packages in many cases are still maintained by BigBang, but for security purposes are not included into the BigBang product.
+[In-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps) are supported add-ons that adhere to all the BigBang package standards, are outside the scope of the DevSecOps Reference Design but have been adopted as an official Big Bang offering for key customers. These packages are supported, updated, and maintained by team members of BigBang and are labeled with the "BigBang Supported" badge on the repository's `README.md` page, which indicates active support.  That being said, BigBang reserves the right to deprecate support for these packages.
 
-[Third Party Packages](https://repo1.dso.mil/platform-one/big-bang/apps/third-party) are packages that adhere by all the BigBang package standards, but are missing key requirements (defined in [New Package Requests](NewPackageRequests.md)).  The most common being approved IronBank containers.
+### Out-of-Tree Packages
 
-There are two types of third party packages:
+[Out-of-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps/third-party) are third party packages that adhere to all the BigBang package standards.  These packages are predominantly community-maintained packages; however, some packages may be jointly maintained by BigBang and community codeowners. All "out-of-tree" packages are maintained by community partners and available for consumption but are not included as an official Big Bang supported offering.
 
-#### Big Bang Supported and Maintained
-
-These are packages that are supported, updated, and maintained by team members of BigBang. This designation is usually reserved for packages that key customers require, but are missing approved IronBank containers, or blanket approval that allows them to be included with the BigBang product.
-
-These products are labeled with the "BigBang Supported" badge on the repository's `README.md` page, which indicates active support.  That being said, BigBang reserves the right to deprecate support for these packages.
-
-#### Independent
-
-These are packages that are not owned by team members of BigBang, but are still actively maintained independent of BigBang.  There are no rules as to who/what is allowed to own these packages, only that they must be actively maintained and up to BigBang Package Requirements.  Stale packages will be removed over time (exact timeline TBD) by members of BigBang.
+[Out-of-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps/third-party) are packages that adhere by all the BigBang package standards (defined in [New Package Requests](NewPackageRequests.md)).
 
 ## PR-X. Packages are Helm Charts
 
