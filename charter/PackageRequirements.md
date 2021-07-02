@@ -33,17 +33,17 @@ In general, the following rules must be met:
 
 When the above are true, the package _may_ be considered for approval and inclusion within BigBang based off the requirements in [New Package Requests](NewPackageRequests.md).
 
-Depending on the package, the customer need, and the approval process, packages may not comply with the above requirements to be integrated with BigBang, but still be heavily desired by customers.  To account for these packages, BigBang Third Party Packages can be used.
-
-### In-Tree Packages
-
-[In-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps) are supported add-ons that adhere to all the BigBang package standards, are outside the scope of the DevSecOps Reference Design but have been adopted as an official Big Bang offering for key customers. These packages are supported, updated, and maintained by team members of BigBang and are labeled with the "BigBang Supported" badge on the repository's `README.md` page, which indicates active support.  That being said, BigBang reserves the right to deprecate support for these packages.
+Depending on the package, the customer need, and the approval process, packages may not comply with the above requirements to be integrated with BigBang, but still be heavily desired by customers.  To account for these packages, BigBang "Out-of-Tree" Packages can be used.
 
 ### Out-of-Tree Packages
 
 [Out-of-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps/third-party) are third party packages that adhere to all the BigBang package standards.  These packages are predominantly community-maintained packages; however, some packages may be jointly maintained by BigBang and community codeowners. All "out-of-tree" packages are maintained by community partners and available for consumption but are not included as an official Big Bang supported offering.
 
 [Out-of-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps/third-party) are packages that adhere by all the BigBang package standards (defined in [New Package Requests](NewPackageRequests.md)).
+
+### In-Tree Packages
+
+[In-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps) are supportedBig Bang Core add-ons that adhere to all the BigBang package standards. These packages have been adopted as an official Big Bang offering for key customers. As such, they are supported, updated, and maintained by team members of BigBang and are labeled with the "BigBang Supported" badge on the repository's `README.md` page, which indicates active support.  That being said, BigBang reserves the right to deprecate support for these packages.
 
 ## PR-X. Packages are Helm Charts
 
