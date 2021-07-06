@@ -43,7 +43,7 @@ Depending on the package, the customer need, and the approval process, packages 
 
 ### In-Tree Packages
 
-[In-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps) are supportedBig Bang Core add-ons that adhere to all the BigBang package standards. These packages have been adopted as an official Big Bang offering for key customers. As such, they are supported, updated, and maintained by team members of BigBang and are labeled with the "BigBang Supported" badge on the repository's `README.md` page, which indicates active support.  That being said, BigBang reserves the right to deprecate support for these packages.
+[In-Tree Packages](https://repo1.dso.mil/platform-one/big-bang/apps) are supported Big Bang Core add-ons that adhere to all the BigBang package standards. These packages have been adopted as an official Big Bang offering for key customers. As such, they are supported, updated, and maintained by team members of BigBang and are labeled with the "BigBang Supported" badge on the repository's `README.md` page, which indicates active support.  That being said, BigBang reserves the right to deprecate support for these packages.
 
 ## PR-X. Packages are Helm Charts
 
