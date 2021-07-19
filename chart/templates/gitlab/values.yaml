@@ -5,6 +5,8 @@
 {{- define "bigbang.defaults.gitlab" -}}
 hostname: {{ .Values.hostname }}
 
+openshift: {{ .Values.openshift }}
+
 istio:
   enabled: {{ .Values.istio.enabled }}
 
@@ -13,6 +15,7 @@ monitoring:
 
 networkPolicies:
   enabled: {{ .Values.networkPolicies.enabled }}
+  controlPlaneCidr: {{ .Values.networkPolicies.controlPlaneCidr }}
   
 {{- if .Values.addons.gitlab.database.host }}
 postgresql:
