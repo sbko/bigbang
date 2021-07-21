@@ -15,13 +15,19 @@ monitoring:
 
 networkPolicies:
   enabled: {{ .Values.networkPolicies.enabled }}
+  controlPlaneCidr: {{ .Values.networkPolicies.controlPlaneCidr }}
 
 podAnnotations:
   sidecar.istio.io/inject: "true"
   traffic.sidecar.istio.io/includeInboundPorts: "*"
   traffic.sidecar.istio.io/excludeInboundPorts: "9443"
 
-imagePullSecrets:
-  - name: private-registry
+tenants:
+  imagePullSecret:
+    name: private-registry
+  secrets:
+    accessKey: {{ .Values.addons.minio.accesskey | default "minio" }}
+    secretKey: {{ .Values.addons.minio.secretkey | default "minio123" }}
+
 
 {{- end -}}
