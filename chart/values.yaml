@@ -110,7 +110,7 @@ istio:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/istio-controlplane.git
     path: "./chart"
-    tag: "1.10.1-bb.0"
+    tag: "1.10.3-bb.0"
 
   # -- Flux reconciliation overrides specifically for the Istio Package
   flux: {}
@@ -133,7 +133,7 @@ istiooperator:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/istio-operator.git
     path: "./chart"
-    tag: "1.10.1-bb.0"
+    tag: "1.10.3-bb.0"
 
   # -- Flux reconciliation overrides specifically for the Istio Operator Package
   flux: {}
