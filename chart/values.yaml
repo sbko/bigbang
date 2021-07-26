@@ -476,7 +476,7 @@ addons:
     git:
       repo: https://repo1.dso.mil/platform-one/big-bang/apps/application-utilities/minio.git
       path: "./chart"
-      tag: "4.1.2-bb.2"
+      tag: "4.1.2-bb.3"
 
     # -- Flux reconciliation overrides specifically for the Minio Package
     flux: {}
@@ -820,7 +820,8 @@ addons:
     git:
       repo: https://repo1.dso.mil/platform-one/big-bang/apps/collaboration-tools/mattermost.git
       path: "./chart"
-      tag: "0.1.6-bb.7"
+      #tag: "0.1.6-bb.7"
+      branch: "minio-4-upgrade"
 
     # -- Flux reconciliation overrides specifically for the Mattermost Package
     flux: {}
