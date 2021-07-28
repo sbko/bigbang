@@ -1,5 +1,7 @@
 # Gitlab Labels
 
+[[_TOC_]]
+
 ## Issues
 
 Issues are required to have `status`, `priority` and `kind` labels.
@@ -7,7 +9,7 @@ Issues are required to have `status`, `priority` and `kind` labels.
 Generally, all issues derived from an epic should have a `priority` value set to the `priority` of the epic its a part of.
 Issues that are not part of an epic will need to be determined by a package owner or maintainer.
 
-### `kind`
+### Scoped Label `kind`
 
 The kind label shows the type of work that needs to be accomplished
 
@@ -19,7 +21,7 @@ Issues related to Bigbang not functioning as expected
 
 Catch all kind that captures administrative tasking for the BigBang project
 
-#### `kind:ci`
+#### `kind::ci`
 
 Issues related to the CI/CD, developer workflows and/or the release process
 
@@ -39,7 +41,7 @@ Improvement of an existing capability to work more efficiently in specific envir
 
 Improvements on testing for individual packages or Big Bang.  Does not change the actual CI/CD pipelines, just enhances the test suite.
 
-### priority
+### Scoped Label `priority`
 
 #### `priority::high`
 
@@ -53,7 +55,7 @@ Improvements on testing for individual packages or Big Bang.  Does not change th
 
 `priority::low` issues are superficial and do not have any impact on the functioning of production systems
 
-### Status
+### Scoped Label `status`
 
 Status captures the state of the issue
 
@@ -73,7 +75,7 @@ The issue is ready to be reviewed by a Maintainer
 
 This Issue has not been started.
 
-### Packages
+### Package Labels
 
 Package labels are identified by their package name and serve two purposes.
 
@@ -83,7 +85,7 @@ Package labels are identified by their package name and serve two purposes.
 
 Merge Requests are required to have `status` and `kind` labels.
 
-### Status
+### Scoped Label `status`
 
 Status captures the state of the Merge Request
 
@@ -119,7 +121,7 @@ This Merge Request has a proposed change to the Charter
 
 Epics are required to have `priority`, `size` and `status` labels.
 
-### Status
+### Scoped Label `status`
 
 Status captures the state of the Merge Request
 
