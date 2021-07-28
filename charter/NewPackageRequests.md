@@ -1,6 +1,6 @@
 # New Big Bang Packages
 
-This is the process for adding an package into Big Bang
+This is the process for adding an package into Big Bang.
 
 ## Incubation
 
