@@ -336,6 +336,8 @@ addons:
   minio:
     enabled: false
     values:
+      upgradeTenants:
+        enabled: true
       zones:
         servers: 1
       volumesPerServer: 1

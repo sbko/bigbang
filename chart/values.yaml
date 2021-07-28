@@ -567,11 +567,7 @@ addons:
     secretkey: ""
 
     # -- Values to passthrough to the minio instance chart: https://repo1.dso.mil/platform-one/big-bang/apps/application-utilities/minio.git
-    values:
-      # Enable use of new tenant CRD from the 4.1.x release
-      upgradeTenants:
-        enabled: true
-
+    values: {}
 
     # -- Post Renderers.  See docs/postrenders.md
     postRenderers: []
