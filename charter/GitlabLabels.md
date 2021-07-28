@@ -1,180 +1,144 @@
-# Gitlab Labels
+# GitLab Labels
 
 [[_TOC_]]
 
-## Issues
+## Issue Labels
 
 Issues are required to have `status`, `priority` and `kind` labels.
 
-Generally, all issues derived from an epic should have a `priority` value set to the `priority` of the epic its a part of.
-Issues that are not part of an epic will need to be determined by a package owner or maintainer.
+Generally, all issues derived from an epic should have a `priority` value set to the `priority` of the epic its a part of. Issues that are not part of an epic will need to be determined by a package owner or maintainer.
 
 ### Scoped Label `kind`
 
-The kind label shows the type of work that needs to be accomplished
+The `kind` label shows the type of work that needs to be accomplished.
 
-#### `kind::bug`
+`kind::bug`
+: Issues related to BigBang not functioning as expected.
 
-Issues related to Bigbang not functioning as expected
+`kind::chore`
+: Catch all kind that captures administrative tasking for the BigBang project
 
-#### `kind::chore`
+`kind::ci`
+: Issues related to the CI/CD, developer workflows and/or the release process.
 
-Catch all kind that captures administrative tasking for the BigBang project
+`kind::docs`
+: Issues related to documentation.
 
-#### `kind::ci`
+`kind::feature`
+: Creation of a new capability for BigBang and/or one of its packages
 
-Issues related to the CI/CD, developer workflows and/or the release process
+`kind::enhancement`
+: Improvement of an existing capability to work more efficiently in specific environments
 
-#### `kind::docs`
-
-Issues related to documentation
-
-#### `kind::feature`
-
-Creation of a new capability for BigBang and/or one of its packages
-
-#### `kind::enhancement`
-
-Improvement of an existing capability to work more efficiently in specific environments
-
-#### `kind::test`
-
-Improvements on testing for individual packages or Big Bang.  Does not change the actual CI/CD pipelines, just enhances the test suite.
+`kind::test`
+: Improvements on testing for individual packages or Big Bang.  Does not change the actual CI/CD pipelines, just enhances the test suite.
 
 ### Scoped Label `priority`
 
-#### `priority::high`
+`priority::high`
+: Issues are causing runtime issues in production environments. These issues justify a patch of a release.
 
-`priority::high` issues are causing runtime issues in production environments. These issues justify a patch of a release.
+`priority:: medium`
+: Issues are defined by bugs that degrade system performance, but workarounds are available.  
 
-#### `priority:: medium`
-
-`priority:: medium` issues are defined by bugs that degrade system performance, but workarounds are available.  
-
-#### `priority::low`
-
-`priority::low` issues are superficial and do not have any impact on the functioning of production systems
+`priority::low`
+: Issues are superficial and do not have any impact on the functioning of production systems
 
 ### Scoped Label `status`
 
 Status captures the state of the issue
 
-#### `status::blocked`
+`status::blocked`
+: Blocked issues have an external dependency that needs to be solved before work can be completed.  This may be other Big Bang issues or hardening of IronBank images.  If blocked by an IronBank issue, the `ironbank` label should also be applied
 
-Blocked issues have an external dependency that needs to be solved before work can be completed.  This may be other Big Bang issues or hardening of IronBank images.  If blocked by an IronBank issue, the `ironbank` label should also be applied
+`status::doing`
+: Work is actively being done on this issue.  At this point it should have an assignee
 
-#### `status::doing`
+`status::review`
+: The issue is ready to be reviewed by a Maintainer
 
-Work is actively being done on this issue.  At this point it should have an assignee
-
-#### `status::review`
-
-The issue is ready to be reviewed by a Maintainer
-
-#### `status::to-do`
-
-This Issue has not been started.
+`status::to-do`
+: This Issue has not been started.
 
 ### Package Labels
 
 Package labels are identified by their package name and serve two purposes.
 
-1. Packages owners subscribe to the package labels for their packages and will be notified when a new issue or merge request is created with the label
+> Packages owners subscribe to the package labels for their packages and will be notified when a new issue or merge request is created with the label.
 
 ## Merge Requests
 
 Merge Requests are required to have `status` and `kind` labels.
 
-### Scoped Label `status`
+### Merge Requests Scoped Label `status`
 
 Status captures the state of the Merge Request
 
-#### `status::blocked`
+`status::blocked`
+: Blocked merge requests and issues have an external dependency that needs to be solved before work can be completed.  This may be other Big Bang issues or hardening of IronBank images.
 
-Blocked merge requests and issues have an external dependency that needs to be solved before work can be completed.  This may be other Big Bang issues or hardening of IronBank images.
+`status::doing`
+: Work is actively being done on this Merge Request
 
-#### `status::doing`
-
-Work is actively being done on this Merge Request
-
-#### `status::review`
-
-The Merge Request is ready to be reviewed by a Maintainer
-
-#### `status::to-do`
-
-This Merge Request has been assigned, but work as not been started.
+`status::review`
+: The Merge Request is ready to be reviewed by a Maintainer
 
 ### Packages
 
-The package label controls which addons are deployed as part of CI. If a label is present for an addon, the Gitlab testing framework will enable this addon and ensure its tested as part
+The package label controls which addons are deployed as part of CI. If a label is present for an addon, the GitLab testing framework will enable this addon and ensure its tested as part
 
-### `ci::test-infra`
+`ci::test-infra`
+: The CI label for a Merge Request causes the full e2e CI job to run, which includes provisioning Kubernetes clusters in AWS.
 
-The CI label for a Merge Request causes the full e2e CI job to run, which includes provisioning Kubernetes clusters in AWS.
-
-### `charter`
-
-This Merge Request has a proposed change to the Charter
+`charter`
+: This Merge Request has a proposed change to the Charter
 
 ## Epics
 
 Epics are required to have `priority`, `size` and `status` labels.
 
-### Scoped Label `status`
+### Epics Scoped Label `status`
 
 Status captures the state of the Merge Request
 
-#### `status::to-do`
+`status::to-do`
+: This Epic is being identified and worked on by the Maintainers.
 
-This Epic is being identified and worked on by the Maintainers.
+`status::review`
+: The Epic is ready for review by the engineering team.  Team can re-assign to `status::to-do` when more detail is needed.
 
-#### `status::review`
+`status::ready`
+: The epic is accepted by the team and ready for breakdown of work as priority dictates.
 
-The Epic is ready for review by the engineering team.  Team can re-assign to `status::to-do` when more detail is needed.
+`status::doing`
+: Work has been broken out from this epic and is assigned to milestones for completion
 
-#### `status::ready`
-
-The epic is accepted by the team and ready for breakdown of work as priority dictates.
-
-#### `status::doing`
-
-Work has been broken out from this epic and is assigned to milestones for completion
-
-#### `status::blocked`
-
-Epic is blocked by an external dependency that needs to be solved before work can be completed.  This may be other Big Bang Epic or an Epic from another ValueStream.
+`status::blocked`
+: Epic is blocked by an external dependency that needs to be solved before work can be completed.  This may be other Big Bang Epic or an Epic from another ValueStream.
 
 ### Priority
 
-#### `priority::low`
+`priority::low`
+: A nice to have, but not needed to advance the product.
 
-A nice to have, but not needed to advance the product.
+`priority::medium`
+: Medium term delivery providing long term value.
 
-#### `priority::medium`
-
-Medium term delivery providing long term value.
-
-#### `priority::high`
-
-Top of the backlog and should be broken down and worked on when cycles become available
+`priority::high`
+: Top of the backlog and should be broken down and worked on when cycles become available
 
 ### Size
 
 The `size` label helps identify the scope of work needed as part of the epic
 
-#### `size::small`
+`size::small`
+: Sufficiently small enough to be completed by an engineer in a two week period
 
-Sufficiently small enough to be completed by an engineer in a two week period
+`size::medium`
+: A small number of engineers could complete this in a two week period
 
-#### `size::medium`
+`size::large`
+: This epic should be broken down further into consumable sub-epics
 
-A small number of engineers could complete this in a two week period
-
-#### `size::large`
-
-This epic should be broken down further into consumable sub-epics
-
-#### `size::xl`
-
-This epic needs to be broken down further to be able to be tackled in a sprint
+`size::xl`
+: This epic needs to be broken down further to be able to be tackled in a sprint
