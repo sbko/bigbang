@@ -2,13 +2,13 @@
 
 [[_TOC_]]
 
-## Issue Labels
+## Issues
 
 Issues are required to have `status`, `priority` and `kind` labels.
 
 Generally, all issues derived from an epic should have a `priority` value set to the `priority` of the epic its a part of. Issues that are not part of an epic will need to be determined by a package owner or maintainer.
 
-### Scoped Label `kind`
+### Issue Label `kind`
 
 The `kind` label shows the type of work that needs to be accomplished.
 
@@ -33,7 +33,7 @@ The `kind` label shows the type of work that needs to be accomplished.
 `kind::test`
 : Improvements on testing for individual packages or Big Bang.  Does not change the actual CI/CD pipelines, just enhances the test suite.
 
-### Scoped Label `priority`
+### Issue Label `priority`
 
 `priority::high`
 : Issues are causing runtime issues in production environments. These issues justify a patch of a release.
@@ -44,7 +44,7 @@ The `kind` label shows the type of work that needs to be accomplished.
 `priority::low`
 : Issues are superficial and do not have any impact on the functioning of production systems
 
-### Scoped Label `status`
+### Issue Label `status`
 
 Status captures the state of the issue
 
@@ -60,7 +60,7 @@ Status captures the state of the issue
 `status::to-do`
 : This Issue has not been started.
 
-### Package Labels
+### Issue Package Labels
 
 Package labels are identified by their package name and serve two purposes.
 
@@ -70,7 +70,7 @@ Package labels are identified by their package name and serve two purposes.
 
 Merge Requests are required to have `status` and `kind` labels.
 
-### Merge Requests Scoped Label `status`
+### Merge Requests Label `status`
 
 Status captures the state of the Merge Request
 
@@ -83,7 +83,7 @@ Status captures the state of the Merge Request
 `status::review`
 : The Merge Request is ready to be reviewed by a Maintainer
 
-### Packages
+### Merge Requests Packages Label
 
 The package label controls which addons are deployed as part of CI. If a label is present for an addon, the GitLab testing framework will enable this addon and ensure its tested as part
 
@@ -97,7 +97,7 @@ The package label controls which addons are deployed as part of CI. If a label i
 
 Epics are required to have `priority`, `size` and `status` labels.
 
-### Epics Scoped Label `status`
+### Epic Label `status`
 
 Status captures the state of the Merge Request
 
@@ -116,7 +116,7 @@ Status captures the state of the Merge Request
 `status::blocked`
 : Epic is blocked by an external dependency that needs to be solved before work can be completed.  This may be other Big Bang Epic or an Epic from another ValueStream.
 
-### Priority
+### Epic Label Priority
 
 `priority::low`
 : A nice to have, but not needed to advance the product.
@@ -127,7 +127,7 @@ Status captures the state of the Merge Request
 `priority::high`
 : Top of the backlog and should be broken down and worked on when cycles become available
 
-### Size
+### Epic Label Size
 
 The `size` label helps identify the scope of work needed as part of the epic
 
