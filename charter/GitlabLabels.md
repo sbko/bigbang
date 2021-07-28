@@ -2,11 +2,61 @@
 
 [[_TOC_]]
 
+## Epics
+
+Epics are required to have `priority`, `size` and `status` labels.
+
+### Epic Label `status`
+
+Status captures the state of the Epic
+
+`status::to-do`
+: This Epic is being identified and worked on by the Maintainers.
+
+`status::review`
+: The Epic is ready for review by the engineering team.  Team can re-assign to `status::to-do` when more detail is needed.
+
+`status::ready`
+: The epic is accepted by the team and ready for breakdown of work as priority dictates.
+
+`status::doing`
+: Work has been broken out from this epic and is assigned to milestones for completion
+
+`status::blocked`
+: Epic is blocked by an external dependency that needs to be solved before work can be completed.  This may be other Big Bang Epic or an Epic from another ValueStream.
+
+### Epic Label Priority
+
+`priority::low`
+: A nice to have, but not needed to advance the product.
+
+`priority::medium`
+: Medium term delivery providing long term value.
+
+`priority::high`
+: Top of the backlog and should be broken down and worked on when cycles become available
+
+### Epic Label Size
+
+The `size` label helps identify the scope of work needed as part of the epic
+
+`size::small`
+: Sufficiently small enough to be completed by an engineer in a two week period
+
+`size::medium`
+: A small number of engineers could complete this in a two week period
+
+`size::large`
+: This epic should be broken down further into consumable sub-epics
+
+`size::xl`
+: This epic needs to be broken down further to be able to be tackled in a sprint
+
 ## Issues
 
 Issues are required to have `status`, `priority` and `kind` labels.
 
-Generally, all issues derived from an epic should have a `priority` value set to the `priority` of the epic its a part of. Issues that are not part of an epic will need to be determined by a package owner or maintainer.
+Generally, all issues derived from an Epic should have a `priority` value set to the `priority` of the epic its a part of. The priority of issues that are not part of an Epic will need to be determined by a package owner or maintainer.
 
 ### Issue Label `kind`
 
@@ -92,53 +142,3 @@ The package label controls which addons are deployed as part of CI. If a label i
 
 `charter`
 : This Merge Request has a proposed change to the Charter
-
-## Epics
-
-Epics are required to have `priority`, `size` and `status` labels.
-
-### Epic Label `status`
-
-Status captures the state of the Merge Request
-
-`status::to-do`
-: This Epic is being identified and worked on by the Maintainers.
-
-`status::review`
-: The Epic is ready for review by the engineering team.  Team can re-assign to `status::to-do` when more detail is needed.
-
-`status::ready`
-: The epic is accepted by the team and ready for breakdown of work as priority dictates.
-
-`status::doing`
-: Work has been broken out from this epic and is assigned to milestones for completion
-
-`status::blocked`
-: Epic is blocked by an external dependency that needs to be solved before work can be completed.  This may be other Big Bang Epic or an Epic from another ValueStream.
-
-### Epic Label Priority
-
-`priority::low`
-: A nice to have, but not needed to advance the product.
-
-`priority::medium`
-: Medium term delivery providing long term value.
-
-`priority::high`
-: Top of the backlog and should be broken down and worked on when cycles become available
-
-### Epic Label Size
-
-The `size` label helps identify the scope of work needed as part of the epic
-
-`size::small`
-: Sufficiently small enough to be completed by an engineer in a two week period
-
-`size::medium`
-: A small number of engineers could complete this in a two week period
-
-`size::large`
-: This epic should be broken down further into consumable sub-epics
-
-`size::xl`
-: This epic needs to be broken down further to be able to be tackled in a sprint
