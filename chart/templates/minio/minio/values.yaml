@@ -5,6 +5,8 @@
 {{- define "bigbang.defaults.minio" -}}
 hostname: {{ .Values.hostname }}
 
+openshift: {{ .Values.openshift }}
+
 istio:
   enabled: {{ .Values.istio.enabled }}
   virtualService:  # this key is non-standard and needs to be fixed in the package
