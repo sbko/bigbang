@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## [1.13.0]
+## [1.14.0]
 
 ### Upgrade Notice
 
@@ -38,6 +38,7 @@ mc alias set <alais name> HOSTNAME ACCESSKEY SECRETKEY
 mc mirror <alias name>/ <local storage location>
 
 ```
+[!1.13.0 Merge Requests](https://repo1.dso.mil/platform-one/big-bang/bigbang/-/merge_requests?scope=all&utf8=%E2%9C%93&state=merged&milestone_title=1.13.0); List of Merge Requests in this Release
 
 ## [1.12.0]
 
