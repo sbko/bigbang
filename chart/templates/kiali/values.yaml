@@ -4,11 +4,15 @@
 
 {{- define "bigbang.defaults.kiali" -}}
 hostname: {{ .Values.hostname }}
+
+openshift: {{ .Values.openshift}}
+
 istio:
   enabled: {{ .Values.istio.enabled }}
   kiali:
-    hosts:
-      - kiali{{ if .Values.addons.keycloak.enabled }}.admin{{ end }}.{{ .Values.hostname }}
+    gateways:
+    - istio-system/{{ default "public" .Values.kiali.ingress.gateway }}
+
 monitoring:
   enabled: {{ .Values.monitoring.enabled }}
 elasticsearch:
@@ -31,6 +35,13 @@ cr:
       {{- else }}
       strategy: token
       {{- end }}
+    external_services:
+      grafana:
+        {{- $grafanaUrls := first (dig "istio" "grafana" "hosts" list .Values.monitoring.values) }}
+        url: {{ tpl ($grafanaUrls | default (printf "%s.%s" "grafana" .Values.hostname)) . | quote }}
+      tracing:
+        {{- $tracingUrls := first (dig "istio" "jaeger" "hosts" list .Values.jaeger.values) }}
+        url: {{ tpl ($tracingUrls | default (printf "%s.%s" "tracing" .Values.hostname)) . | quote }}
     api:
       namespaces:
         # bigbang watches all!
@@ -38,4 +49,8 @@ cr:
 networkPolicies:
   enabled: {{ .Values.networkPolicies.enabled }}
   controlPlaneCidr: {{ .Values.networkPolicies.controlPlaneCidr }}
+  ingressLabels:
+    {{- $gateway := default "public" .Values.kiali.ingress.gateway }}
+    {{- $default := dict "app" (dig "gateways" $gateway "ingressGateway" nil .Values.istio) "istio" nil }}
+    {{- toYaml (dig "values" "gateways" $gateway "selector" $default .Values.istio) | nindent 4 }}
 {{- end -}}

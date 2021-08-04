@@ -363,7 +363,8 @@ addons:
     enabled: false
     values:
       persistence:
-        storageSize: 3Gi
+        # Do NOT set this below 4Gi, nexus will fail to boot
+        storageSize: 10Gi
       nexus:
       # https://help.sonatype.com/repomanager3/installation/system-requirements#SystemRequirements-JVMDirectMemory
         env:
@@ -412,6 +413,8 @@ addons:
 
   keycloak:
     enabled: false
+    ingress:
+      gateway: "public"
     values:
       replicas: 1
       resources:
