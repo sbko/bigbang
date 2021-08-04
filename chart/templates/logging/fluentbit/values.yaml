@@ -40,6 +40,7 @@ podLabels:
 {{- end }}
 
 {{- if .Values.openshift }}
+openshift: {{ .Values.openshift }}
 podSecurityContext:
   seLinuxOptions:
     type: "spc_t"
