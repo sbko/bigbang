@@ -3225,11 +3225,11 @@ spec:
             port: healthz
         resources:
           limits:
-            cpu: 1000m
-            memory: 1Gi
+            cpu: 100m
+            memory: 350Mi
           requests:
             cpu: 100m
-            memory: 64Mi
+            memory: 350Mi
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -3298,11 +3298,11 @@ spec:
             port: healthz
         resources:
           limits:
-            cpu: 1000m
-            memory: 1Gi
+            cpu: 100m
+            memory: 150Mi
           requests:
             cpu: 100m
-            memory: 64Mi
+            memory: 150Mi
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -3376,11 +3376,11 @@ spec:
             port: healthz
         resources:
           limits:
-            cpu: 1000m
-            memory: 1Gi
+            cpu: 100m
+            memory: 150Mi
           requests:
             cpu: 100m
-            memory: 64Mi
+            memory: 150Mi
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -3454,11 +3454,11 @@ spec:
             port: http
         resources:
           limits:
-            cpu: 1000m
-            memory: 1Gi
+            cpu: 100m
+            memory: 150Mi
           requests:
-            cpu: 50m
-            memory: 64Mi
+            cpu: 100mm
+            memory: 150Mi
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
