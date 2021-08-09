@@ -9,7 +9,8 @@ metadata:
     app.kubernetes.io/name: istio-operator
     app.kubernetes.io/component: "core"
     {{- include "commonLabels" . | nindent 4}}
-  annotations: "{{ .Values.istiooperator }}"
+  annotations:
+    test: "{{ .Values.istiooperator }}"
 spec:
   targetNamespace: istio-operator
   chart:
