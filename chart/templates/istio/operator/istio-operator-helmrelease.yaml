@@ -11,6 +11,7 @@ metadata:
     {{- include "commonLabels" . | nindent 4}}
   annotations:
     test: "{{ .Values.istiooperator }}"
+    test2: "{{- if .Values.istiooperator.revision }}{{ .Values.istiooperator.revision }}{{- end }}"
 spec:
   targetNamespace: istio-operator
   chart:
