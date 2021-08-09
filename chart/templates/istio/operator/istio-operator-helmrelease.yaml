@@ -3,12 +3,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: istio-operator-test-{{- if .Values.istiooperator.revision }}-{{ .Values.istiooperator.revision }}{{- end }}
+  name: istio-operator{{- if .Values.istiooperator.revision }}-{{ .Values.istiooperator.revision }}{{- end }}
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/name: istio-operator
     app.kubernetes.io/component: "core"
     {{- include "commonLabels" . | nindent 4}}
+  annotations: "{{ .Values.istiooperator }}"
 spec:
   targetNamespace: istio-operator
   chart:
