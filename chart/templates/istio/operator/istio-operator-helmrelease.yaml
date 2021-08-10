@@ -44,6 +44,7 @@ spec:
   {{- end }}
 {{- end }}
 {{- if .Values.istiooperator.values.revision }}
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
