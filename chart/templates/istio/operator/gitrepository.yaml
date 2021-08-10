@@ -28,7 +28,7 @@ metadata:
     {{- include "commonLabels" . | nindent 4}}
 spec:
   interval: {{ .Values.flux.interval }}
-  url: {{ .Values.istiooperator.gitupgrade.repo .Values.istiooperator.git.repo }}
+  url: {{ .Values.istiooperator.gitupgrade.repo | .Values.istiooperator.git.repo }}
   ref:
     {{- include "validRef" .Values.istiooperator.gitupgrade | nindent 4 }}
   {{ include "gitIgnore" . }}
