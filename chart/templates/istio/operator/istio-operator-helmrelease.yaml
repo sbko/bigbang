@@ -51,7 +51,7 @@ metadata:
   name: istio-operator-{{ .Values.istiooperator.values.revision }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app.kubernetes.io/name: istio-operator
+    app.kubernetes.io/name: istio-operator-{{ .Values.istiooperator.values.revision }}
     app.kubernetes.io/component: "core"
     {{- include "commonLabels" . | nindent 4}}
 spec:
