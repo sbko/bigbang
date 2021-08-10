@@ -15,4 +15,23 @@ spec:
     {{- include "validRef" .Values.istiooperator.git | nindent 4 }}
   {{ include "gitIgnore" . }}
   {{- include "gitCreds" . | nindent 2 }}
+{{- if .Values.istiooperator.gitupgrade }}
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: istio-operator-upgrade
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: istio-operator
+    app.kubernetes.io/component: "core"
+    {{- include "commonLabels" . | nindent 4}}
+spec:
+  interval: {{ .Values.flux.interval }}
+  url: {{ .Values.istiooperator.gitupgrade.repo .Values.istiooperator.git.repo }}
+  ref:
+    {{- include "validRef" .Values.istiooperator.gitupgrade | nindent 4 }}
+  {{ include "gitIgnore" . }}
+  {{- include "gitCreds" . | nindent 2 }}
+{{- end }}
 {{- end }}
