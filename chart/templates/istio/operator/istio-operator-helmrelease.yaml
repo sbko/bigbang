@@ -62,7 +62,7 @@ spec:
       interval: 5m
       sourceRef:
         kind: GitRepository
-        name: istio-operator{{- if .Values.istiooperator.gitupgrade }}-upgrade{{-end }}
+        name: istio-operator{{- if .Values.istiooperator.gitupgrade }}-upgrade{{- end }}
         namespace: {{ .Release.Namespace }}
 
   {{- toYaml $fluxSettingsIstioOperator | nindent 2 }}
