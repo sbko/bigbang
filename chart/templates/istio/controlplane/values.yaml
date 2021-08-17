@@ -28,7 +28,7 @@ ingressGateways:
 
 {{- range $name, $values := .Values.istio.ingressGateways }}
   {{ $name | nindent 2 }}:
-    {{- toYaml (merge (dict "k8s" $values.kubernetesResourceSpec) (fromYaml (include "istio.ingressgateway.k8s" $values))) | nindent 4 }}
+    {{- toYaml (merge (dict "k8s" $values.k8s) (fromYaml (include "istio.ingressgateway.k8s" $values))) | nindent 4 }}
 {{- end }}
 
 {{- if .Values.istio.gateways }}
